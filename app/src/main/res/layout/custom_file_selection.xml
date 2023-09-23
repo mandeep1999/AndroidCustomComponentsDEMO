@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/selection_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:paddingVertical="24dp"
+            android:background="@drawable/curve_background"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <ImageView
+                android:id="@+id/selection_box_icon"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:src="@drawable/baseline_upload_file_24"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+
+            <TextView
+                android:id="@+id/selection_box_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Click to select a file"
+                android:textSize="20sp"
+                android:layout_marginTop="8dp"
+                android:textColor="#d3d3d3"
+                android:gravity="center"
+                app:layout_constraintTop_toBottomOf="@id/selection_box_icon"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="8dp"
+                app:layout_constraintTop_toBottomOf="@id/selection_box_title">
+
+
+                <ImageView
+                    android:id="@+id/selection_box_subtitle_icon"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/baseline_file_upload_24" />
+
+                <TextView
+                    android:id="@+id/selection_box_subtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    tools:text="Upload"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:textColor="#3F51B5" />
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/supported_file_types_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/selection_box"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginVertical="4dp"
+            android:gravity="right"
+            android:textColor="#d3d3d3"
+            tools:text="supported file types: pdf, docx"
+            />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/selected_file_cl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="8dp"
+            android:layout_margin="8dp"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/supported_file_types_text_view"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <TextView
+                android:id="@+id/file_name_text_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:text="Filename.pdf"
+                android:textColor="#3E3C3C"
+                android:textSize="16sp"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/clear_icon"
+                app:layout_constraintLeft_toLeftOf="parent" />
+
+            <ImageView
+                android:id="@+id/clear_icon"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                app:tint="#3E3C3C"
+                android:src="@drawable/baseline_clear_24"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
