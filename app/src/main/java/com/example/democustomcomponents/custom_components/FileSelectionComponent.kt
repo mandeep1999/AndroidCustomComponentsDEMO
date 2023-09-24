@@ -4,8 +4,11 @@ import android.annotation.SuppressLint
 import android.content.ContentResolver
 import android.content.Context
 import android.database.Cursor
+import android.graphics.Color
+import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.net.Uri
+import android.os.Build
 import android.provider.OpenableColumns
 import android.util.AttributeSet
 import android.view.LayoutInflater
@@ -14,10 +17,12 @@ import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.MutableLiveData
 import com.example.democustomcomponents.R
 import com.example.democustomcomponents.databinding.CustomFileSelectionBinding
+import java.util.Locale
 
 
 class FileSelectionComponent : ConstraintLayout {
@@ -26,7 +31,9 @@ class FileSelectionComponent : ConstraintLayout {
         context,
         attrs,
         defStyle
-    )
+    ) {
+        init(context, attrs, defStyle)
+    }
 
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
 
@@ -53,6 +60,65 @@ class FileSelectionComponent : ConstraintLayout {
 
     private var getContent: ActivityResultLauncher<Array<String>>? = null
 
+    private fun init(context: Context, attrs: AttributeSet?, defStyle: Int) {
+        val attributes =
+            context.obtainStyledAttributes(attrs, R.styleable.FileSelectionComponent, defStyle, 0)
+        this.setTitleText(attributes.getString(R.styleable.FileSelectionComponent_title_text))
+        this.setTitleTextColor(
+            attributes.getColor(
+                R.styleable.FileSelectionComponent_title_text_color,
+                Color.parseColor("#d3d3d3")
+            )
+        )
+        this.setTitleTextFontSize(
+            attributes.getFloat(
+                R.styleable.FileSelectionComponent_title_text_size,
+                20.0f
+            )
+        )
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            this.setTitleTextTypeFace(attributes.getFont(R.styleable.FileSelectionComponent_title_text_typeface))
+        }
+        this.setDescriptionText(attributes.getString(R.styleable.FileSelectionComponent_description_text))
+        this.setDescriptionTextColor(
+            attributes.getColor(
+                R.styleable.FileSelectionComponent_description_text_color,
+                Color.parseColor("#d3d3d3")
+            )
+        )
+        this.setDescriptionTextFontSize(
+            attributes.getFloat(
+                R.styleable.FileSelectionComponent_description_text_size,
+                18.0f
+            )
+        )
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            this.setDescriptionTextTypeFace(attributes.getFont(R.styleable.FileSelectionComponent_description_text_typeface))
+        }
+        attributes.getDrawable(R.styleable.FileSelectionComponent_selection_box_background)
+            ?.let { this.setSelectionBoxBackground(it) }
+        attributes.getDrawable(R.styleable.FileSelectionComponent_selection_box_icon)?.let {
+            this.setSelectionBoxIcon(it)
+        }
+        attributes.getDrawable(R.styleable.FileSelectionComponent_description_icon)?.let {
+            this.setSelectionBoxDescriptionIcon(it)
+        }
+        this.setSupportedFilesTextString(attributes.getString(R.styleable.FileSelectionComponent_supported_types_text))
+        attributes.recycle()
+    }
+
+    fun initialise(
+        supportedFileTypes: Array<String>?,
+        appCompatActivity: AppCompatActivity,
+        fileSelectedCallback: ((uri: Uri?) -> Unit)?
+    ) {
+        this.fileSelectedCallback = fileSelectedCallback
+        this.activity = appCompatActivity
+        initialiseLauncher(fileSelectedCallback)
+        initialiseViews(supportedFileTypes)
+        initialiseObservers()
+    }
+
     private fun initialiseLauncher(
         fileSelectedCallback: ((uri: Uri?) -> Unit)?,
     ) {
@@ -65,25 +131,9 @@ class FileSelectionComponent : ConstraintLayout {
             }
     }
 
-    fun configure(titleText: String?, titleTextAppearance: Int?, subTitleText: String?, subTitleTextAppearance: Int?, selectionBoxIcon: Drawable?, subTitleDescriptionIcon: Drawable?, supportedFileTypes: List<String>?){
-        setTitleText(text = titleText, textAppearance =  titleTextAppearance)
-        setSubtitleText(text = subTitleText, textAppearance = subTitleTextAppearance)
-        selectionBoxIcon?.let { setSelectionBoxIcon(drawable = it) }
-        subTitleDescriptionIcon?.let { setSubtitleIcon(drawable = it) }
-        setSupportedFilesText(supportedFileTypes)
-    }
-
-    fun initialise(supportedFileTypes: Array<String>?, appCompatActivity: AppCompatActivity, fileSelectedCallback: ((uri: Uri?) -> Unit)?){
-        this.fileSelectedCallback = fileSelectedCallback
-        this.activity = appCompatActivity
-        initialiseLauncher(fileSelectedCallback)
-        initialiseViews(supportedFileTypes)
-        initialiseObservers()
-    }
-
     private fun initialiseViews(supportedFileTypes: Array<String>?) {
         binding.selectionBox.setOnClickListener {
-            if((supportedFileTypes?.size ?: 0) > 0){
+            if ((supportedFileTypes?.size ?: 0) > 0) {
                 getContent?.launch(supportedFileTypes)
             } else {
                 getContent?.launch(mimeTypes)
@@ -95,13 +145,12 @@ class FileSelectionComponent : ConstraintLayout {
         }
     }
 
-    private fun initialiseObservers(){
+    private fun initialiseObservers() {
         activity?.let {
-            fileSelectedUriLiveData.observe(it) {uri ->
-                if(uri == null){
+            fileSelectedUriLiveData.observe(it) { uri ->
+                if (uri == null) {
                     binding.selectedFileCl.visibility = GONE
-                }
-                else {
+                } else {
                     binding.selectedFileCl.visibility = VISIBLE
                     setFileName(uri)
                 }
@@ -109,9 +158,13 @@ class FileSelectionComponent : ConstraintLayout {
         }
     }
 
-    private fun setFileName(uri: Uri){
-        val fileName = getFileName(uri) + "." + getFileExtension(uri)
-        binding.fileNameTextView.text = fileName
+    private fun setFileName(uri: Uri) {
+        val fileName = getFileName(uri)
+        binding.fileNameTextView.text = fileName?.replaceFirstChar {
+            if (it.isLowerCase()) it.titlecase(
+                Locale.ROOT
+            ) else it.toString()
+        }
     }
 
     @SuppressLint("Range")
@@ -131,60 +184,76 @@ class FileSelectionComponent : ConstraintLayout {
         return fileName
     }
 
-    private fun getFileExtension( uri: Uri): String? {
-        val contentResolver = context.contentResolver
-        val mimeTypeMap = MimeTypeMap.getSingleton()
-        var extension: String? = null
-
-        // Get the MIME type from the content resolver
-        val mimeType = contentResolver.getType(uri)
-        if (mimeType != null) {
-            extension = mimeTypeMap.getExtensionFromMimeType(mimeType)
-        }
-        return extension
-    }
-
-
-
-    private fun setTitleText(text: String?, textAppearance: Int?){
-        if(text == null){
+    fun setTitleText(text: String?) {
+        if (text == null)
             binding.selectionBoxTitle.visibility = GONE
-        }else {
+        text?.let {
             binding.selectionBoxTitle.visibility = VISIBLE
-            binding.selectionBoxTitle.text = text
-            textAppearance?.let {
-                binding.selectionBoxTitle.setTextAppearance(it)
-            }
+            binding.selectionBoxTitle.text = it
         }
     }
 
-    private fun setSubtitleText(text: String?, textAppearance: Int?){
-        if(text == null){
-            binding.selectionBoxSubtitle.visibility = GONE
-        }else {
-            binding.selectionBoxSubtitle.visibility = VISIBLE
-            binding.selectionBoxSubtitle.text = text
-            textAppearance?.let {
-                binding.selectionBoxSubtitle.setTextAppearance(it)
-            }
+    fun setTitleTextColor(color: Int) {
+        binding.selectionBoxTitle.setTextColor(color)
+    }
+
+    fun setTitleTextTypeFace(tf: Typeface?) {
+        binding.selectionBoxTitle.typeface = tf
+    }
+
+    fun setTitleTextFontSize(textSize: Float) {
+        binding.selectionBoxTitle.textSize = textSize
+    }
+
+    fun setDescriptionText(text: String?) {
+        if (text == null)
+            binding.selectionBoxDescriptionTextView.visibility = GONE
+        text?.let {
+            binding.selectionBoxDescriptionTextView.visibility = VISIBLE
+            binding.selectionBoxDescriptionTextView.text = it
         }
     }
 
-    private fun setSelectionBoxIcon(drawable: Drawable){
-        binding.selectionBoxIcon.background = drawable
+    fun setDescriptionTextColor(color: Int) {
+        binding.selectionBoxDescriptionTextView.setTextColor(color)
     }
 
-    private fun setSubtitleIcon(drawable: Drawable){
-        binding.selectionBoxSubtitleIcon.background = drawable
+    fun setDescriptionTextTypeFace(tf: Typeface?) {
+        binding.selectionBoxDescriptionTextView.typeface = tf
     }
 
-    private fun setSupportedFilesText(list: List<String>?){
-        if(list == null){
+    fun setDescriptionTextFontSize(textSize: Float) {
+        binding.selectionBoxDescriptionTextView.textSize = textSize
+    }
+
+    fun setSelectionBoxIcon(drawable: Drawable) {
+        binding.selectionBoxIcon.setImageDrawable(drawable)
+    }
+
+    fun setSelectionBoxDescriptionIcon(drawable: Drawable) {
+        binding.selectionBoxDescriptionIcon.setImageDrawable(drawable)
+    }
+
+    fun setSelectionBoxBackground(drawable: Drawable) {
+        binding.selectionBox.background = drawable
+    }
+
+    fun setSupportedFilesTextList(list: List<String>?) {
+        if (list == null) {
             binding.supportedFileTypesTextView.visibility = GONE
-        }else {
+        } else {
             val supportedFileTypesString = "Supported File Types " + list.joinToString(",")
             binding.supportedFileTypesTextView.visibility = VISIBLE
             binding.supportedFileTypesTextView.text = supportedFileTypesString
+        }
+    }
+
+    private fun setSupportedFilesTextString(types: String?) {
+        if (types == null) {
+            binding.supportedFileTypesTextView.visibility = GONE
+        } else {
+            binding.supportedFileTypesTextView.visibility = VISIBLE
+            binding.supportedFileTypesTextView.text = types
         }
     }
 

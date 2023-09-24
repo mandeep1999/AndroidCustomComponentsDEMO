@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="FileSelectionComponent">
+
+        <attr name="title_text" format="string" />
+        <attr name="title_text_color" format="color" />
+        <attr name="title_text_size" format="float" />
+        <attr name="title_text_typeface" format="enum" />
+        <attr name="description_text" format="string" />
+        <attr name="description_text_color" format="color" />
+        <attr name="description_text_size" format="float" />
+        <attr name="description_text_typeface" format="enum" />
+        <attr name="selection_box_background" format="reference" />
+        <attr name="selection_box_icon" format="reference" />
+        <attr name="description_icon" format="reference" />
+        <attr name="supported_types_text" format="string" />
+
+    </declare-styleable>
+
+
+
+</resources>

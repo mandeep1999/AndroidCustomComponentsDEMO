@@ -34,7 +34,7 @@
                 android:id="@+id/selection_box_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:text="Click to select a file"
+                android:text="@string/click_to_select_a_file"
                 android:textSize="20sp"
                 android:layout_marginTop="8dp"
                 android:textColor="#d3d3d3"
@@ -45,6 +45,7 @@
 
 
             <LinearLayout
+                android:id="@+id/description_ll"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -56,13 +57,13 @@
 
 
                 <ImageView
-                    android:id="@+id/selection_box_subtitle_icon"
+                    android:id="@+id/selection_box_description_icon"
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:src="@drawable/baseline_file_upload_24" />
 
                 <TextView
-                    android:id="@+id/selection_box_subtitle"
+                    android:id="@+id/selection_box_description_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">DemoCustomComponents</string>
+    <string name="custom_components_demo">Custom Components DEMO</string>
+    <string name="click_to_select_a_file">Click to select a file</string>
 </resources>
