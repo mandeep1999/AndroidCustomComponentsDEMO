@@ -257,5 +257,4 @@ class FileSelectionComponent : ConstraintLayout {
         }
     }
 
-
 }
