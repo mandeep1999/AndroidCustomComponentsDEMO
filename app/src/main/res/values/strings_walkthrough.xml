@@ -4,6 +4,7 @@
     <string name="walkthrough_welcome_next">Start</string>
     <string name="walkthrough_card_title">File picker</string>
     <string name="walkthrough_card_description">Drop this component into any screen to handle document uploads.</string>
+    <string name="walkthrough_spotlight_description">Tap anywhere to continue.</string>
     <string name="walkthrough_tooltip_title">Upload here</string>
     <string name="walkthrough_tooltip_description">Opens the system file picker for PDF and Word documents.</string>
     <string name="walkthrough_banner_title">Supported formats</string>

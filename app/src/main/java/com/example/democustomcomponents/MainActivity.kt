@@ -71,6 +71,7 @@ class MainActivity : AppCompatActivity() {
                 backText = getString(android.R.string.cancel)
                 nextText = getString(R.string.walkthrough_next)
                 placement = Placement.CENTER
+                advanceOnOutsideTap = true
             }
             .doOnComplete {
                 scrollTargetIntoView(binding.fileSelectionComponent) {
@@ -91,6 +92,7 @@ class MainActivity : AppCompatActivity() {
                 description = getString(R.string.walkthrough_tooltip_description)
                 nextText = getString(R.string.walkthrough_next)
                 placement = Placement.BOTTOM
+                advanceOnOutsideTap = true
             }
             .banner(selectionBox) {
                 title = getString(R.string.walkthrough_banner_title)
@@ -103,7 +105,8 @@ class MainActivity : AppCompatActivity() {
                 description = getString(R.string.walkthrough_finish_description)
                 backText = getString(android.R.string.cancel)
                 nextText = getString(R.string.walkthrough_done)
-                placement = Placement.BOTTOM
+                placement = Placement.CENTER
+                advanceOnOutsideTap = true
             }
             .doOnComplete { markWalkthroughShown() }
             .show()
@@ -119,7 +122,7 @@ class MainActivity : AppCompatActivity() {
             val relativeY = targetLocation[1] - contentLocation[1]
             val scrollY = (relativeY - 120).coerceAtLeast(0)
             binding.demoScrollView.smoothScrollTo(0, scrollY)
-            binding.demoScrollView.postDelayed(onComplete, 350)
+            binding.demoScrollView.postDelayed(onComplete, 600)
         }
     }
 
