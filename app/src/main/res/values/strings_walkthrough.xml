@@ -1,0 +1,22 @@
+<resources>
+    <string name="walkthrough_welcome_title">Full Screen</string>
+    <string name="walkthrough_welcome_description">WalkMeThrough supports five presentation styles. This intro step uses the full-screen presentation.</string>
+    <string name="walkthrough_welcome_next">Start tour</string>
+    <string name="walkthrough_card_title">Card</string>
+    <string name="walkthrough_card_description">Card steps highlight a target view and show a floating dialog with a title, description, and navigation buttons.</string>
+    <string name="walkthrough_spotlight_title">Spotlight</string>
+    <string name="walkthrough_spotlight_description">Spotlight dims the screen and cuts out the target. Tap outside the highlight to continue.</string>
+    <string name="walkthrough_tooltip_title">Tooltip</string>
+    <string name="walkthrough_tooltip_description">Tooltips are compact callouts anchored to a target. Tap outside to move to the next step.</string>
+    <string name="walkthrough_banner_title">Banner</string>
+    <string name="walkthrough_banner_description">Banner steps slide a message up from the bottom while keeping the target highlighted.</string>
+    <string name="walkthrough_finish_title">You\'re all set</string>
+    <string name="walkthrough_finish_description">You\'ve seen every WalkMeThrough presentation. Tap the help icon anytime to replay this tour.</string>
+    <string name="walkthrough_next">Next</string>
+    <string name="walkthrough_done">Done</string>
+    <string name="presentation_full_screen">Full Screen</string>
+    <string name="presentation_card">Card</string>
+    <string name="presentation_spotlight">Spotlight</string>
+    <string name="presentation_tooltip">Tooltip</string>
+    <string name="presentation_banner">Banner</string>
+</resources>

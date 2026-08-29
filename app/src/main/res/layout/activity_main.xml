@@ -53,6 +53,45 @@
                     android:text="@string/demo_subtitle"
                     android:textAppearance="@style/TextAppearance.Demo.Subtitle" />
 
+                <com.google.android.material.chip.ChipGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    app:chipSpacingHorizontal="8dp"
+                    app:chipSpacingVertical="4dp">
+
+                    <com.google.android.material.chip.Chip
+                        style="@style/Widget.Demo.PresentationChip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/presentation_full_screen" />
+
+                    <com.google.android.material.chip.Chip
+                        style="@style/Widget.Demo.PresentationChip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/presentation_card" />
+
+                    <com.google.android.material.chip.Chip
+                        style="@style/Widget.Demo.PresentationChip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/presentation_spotlight" />
+
+                    <com.google.android.material.chip.Chip
+                        style="@style/Widget.Demo.PresentationChip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/presentation_tooltip" />
+
+                    <com.google.android.material.chip.Chip
+                        style="@style/Widget.Demo.PresentationChip"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/presentation_banner" />
+
+                </com.google.android.material.chip.ChipGroup>
+
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/demo_card"
                     android:layout_width="match_parent"

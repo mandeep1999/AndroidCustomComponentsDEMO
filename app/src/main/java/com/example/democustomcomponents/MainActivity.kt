@@ -54,6 +54,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun showWalkthrough() {
         val selectionBox = binding.fileSelectionComponent.findViewById<android.view.View>(R.id.selection_box)
+        val uploadIcon = binding.fileSelectionComponent.findViewById<android.view.View>(R.id.selection_icon_container)
 
         Walkthrough.with(this)
             .fullScreen(binding.root) {
@@ -62,25 +63,34 @@ class MainActivity : AppCompatActivity() {
                 nextText = getString(R.string.walkthrough_welcome_next)
             }
             .card(binding.demoCard) {
-                title = getString(R.string.walkthrough_demo_title)
-                description = getString(R.string.walkthrough_demo_description)
+                title = getString(R.string.walkthrough_card_title)
+                description = getString(R.string.walkthrough_card_description)
                 backText = getString(android.R.string.cancel)
-                nextText = getString(R.string.walkthrough_file_next)
+                nextText = getString(R.string.walkthrough_next)
                 placement = Placement.BOTTOM
             }
-            .card(selectionBox) {
-                title = getString(R.string.walkthrough_file_title)
-                description = getString(R.string.walkthrough_file_description)
-                backText = getString(android.R.string.cancel)
-                nextText = getString(R.string.walkthrough_file_next)
+            .spotlight(selectionBox) {
+                title = getString(R.string.walkthrough_spotlight_title)
+                description = getString(R.string.walkthrough_spotlight_description)
+            }
+            .tooltip(uploadIcon) {
+                title = getString(R.string.walkthrough_tooltip_title)
+                description = getString(R.string.walkthrough_tooltip_description)
+                nextText = getString(R.string.walkthrough_next)
                 placement = Placement.BOTTOM
             }
-            .card(binding.fileSelectionComponent) {
-                title = getString(R.string.walkthrough_selection_title)
-                description = getString(R.string.walkthrough_selection_description)
+            .banner(selectionBox) {
+                title = getString(R.string.walkthrough_banner_title)
+                description = getString(R.string.walkthrough_banner_description)
+                backText = getString(android.R.string.cancel)
+                nextText = getString(R.string.walkthrough_next)
+            }
+            .card(binding.walkthroughHelpButton) {
+                title = getString(R.string.walkthrough_finish_title)
+                description = getString(R.string.walkthrough_finish_description)
                 backText = getString(android.R.string.cancel)
                 nextText = getString(R.string.walkthrough_done)
-                placement = Placement.TOP
+                placement = Placement.BOTTOM
             }
             .doOnComplete { markWalkthroughShown() }
             .show()
