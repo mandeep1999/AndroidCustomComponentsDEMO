@@ -3,6 +3,7 @@ package com.example.democustomcomponents
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -53,26 +54,38 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun showWalkthrough() {
-        val selectionBox = binding.fileSelectionComponent.findViewById<android.view.View>(R.id.selection_box)
-        val uploadIcon = binding.fileSelectionComponent.findViewById<android.view.View>(R.id.selection_icon_container)
+        binding.demoScrollView.scrollTo(0, 0)
+        binding.root.post { showWalkthroughIntro() }
+    }
 
+    private fun showWalkthroughIntro() {
         Walkthrough.with(this)
             .fullScreen(binding.root) {
                 title = getString(R.string.walkthrough_welcome_title)
                 description = getString(R.string.walkthrough_welcome_description)
                 nextText = getString(R.string.walkthrough_welcome_next)
             }
-            .card(binding.demoCard) {
+            .card(binding.demoTextView) {
                 title = getString(R.string.walkthrough_card_title)
                 description = getString(R.string.walkthrough_card_description)
                 backText = getString(android.R.string.cancel)
                 nextText = getString(R.string.walkthrough_next)
-                placement = Placement.BOTTOM
+                placement = Placement.CENTER
             }
-            .spotlight(selectionBox) {
-                title = getString(R.string.walkthrough_spotlight_title)
-                description = getString(R.string.walkthrough_spotlight_description)
+            .doOnComplete {
+                scrollTargetIntoView(binding.fileSelectionComponent) {
+                    showWalkthroughPresentations()
+                }
             }
+            .show()
+    }
+
+    private fun showWalkthroughPresentations() {
+        val selectionBox = binding.fileSelectionComponent.findViewById<View>(R.id.selection_box)
+        val uploadIcon = binding.fileSelectionComponent.findViewById<View>(R.id.selection_icon_container)
+
+        Walkthrough.with(this)
+            .spotlight(selectionBox)
             .tooltip(uploadIcon) {
                 title = getString(R.string.walkthrough_tooltip_title)
                 description = getString(R.string.walkthrough_tooltip_description)
@@ -94,6 +107,20 @@ class MainActivity : AppCompatActivity() {
             }
             .doOnComplete { markWalkthroughShown() }
             .show()
+    }
+
+    private fun scrollTargetIntoView(target: View, onComplete: () -> Unit) {
+        binding.demoScrollView.post {
+            val content = binding.demoScrollView.getChildAt(0)
+            val contentLocation = IntArray(2)
+            val targetLocation = IntArray(2)
+            content.getLocationOnScreen(contentLocation)
+            target.getLocationOnScreen(targetLocation)
+            val relativeY = targetLocation[1] - contentLocation[1]
+            val scrollY = (relativeY - 120).coerceAtLeast(0)
+            binding.demoScrollView.smoothScrollTo(0, scrollY)
+            binding.demoScrollView.postDelayed(onComplete, 350)
+        }
     }
 
     private fun fileSelectionCallback(uri: Uri?) {
