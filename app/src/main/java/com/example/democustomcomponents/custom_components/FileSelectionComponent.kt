@@ -133,7 +133,7 @@ class FileSelectionComponent : ConstraintLayout {
 
     private fun initialiseViews(supportedFileTypes: Array<String>?) {
         binding.selectionBox.setOnClickListener {
-            if ((supportedFileTypes?.size ?: 0) > 0) {
+            if (!supportedFileTypes.isNullOrEmpty()) {
                 getContent?.launch(supportedFileTypes)
             } else {
                 getContent?.launch(mimeTypes)

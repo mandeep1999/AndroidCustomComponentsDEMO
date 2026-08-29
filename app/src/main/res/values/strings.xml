@@ -2,4 +2,16 @@
     <string name="app_name">DemoCustomComponents</string>
     <string name="custom_components_demo">Custom Components DEMO</string>
     <string name="click_to_select_a_file">Click to select a file</string>
+    <string name="walkthrough_help">Show walkthrough</string>
+    <string name="walkthrough_welcome_title">Welcome</string>
+    <string name="walkthrough_welcome_description">This demo showcases reusable custom Android components. Let\'s take a quick tour.</string>
+    <string name="walkthrough_welcome_next">Start tour</string>
+    <string name="walkthrough_demo_title">Custom components</string>
+    <string name="walkthrough_demo_description">This screen demonstrates a reusable FileSelectionComponent you can drop into any layout.</string>
+    <string name="walkthrough_file_title">Select a file</string>
+    <string name="walkthrough_file_description">Tap here to open the document picker. PDF and Word files are supported by default.</string>
+    <string name="walkthrough_file_next">Next</string>
+    <string name="walkthrough_selection_title">Selected file</string>
+    <string name="walkthrough_selection_description">After you pick a file, its name appears here. Use the clear button to remove the selection.</string>
+    <string name="walkthrough_done">Done</string>
 </resources>
