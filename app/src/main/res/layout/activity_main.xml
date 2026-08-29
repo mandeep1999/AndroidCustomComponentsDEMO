@@ -9,21 +9,8 @@
         android:background="@drawable/bg_demo_gradient"
         tools:context=".MainActivity">
 
-        <ImageButton
-            android:id="@+id/walkthrough_help_button"
-            android:layout_width="44dp"
-            android:layout_height="44dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="20dp"
-            android:background="@drawable/bg_help_button"
-            android:contentDescription="@string/walkthrough_help"
-            android:padding="10dp"
-            android:src="@android:drawable/ic_menu_help"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/primary" />
-
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/demo_scroll_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:clipToPadding="false"
@@ -71,15 +58,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="28dp"
+                    android:clipChildren="true"
+                    android:clipToOutline="true"
                     app:cardBackgroundColor="@color/surface"
                     app:cardCornerRadius="24dp"
-                    app:cardElevation="6dp"
-                    app:strokeColor="@color/surface_stroke"
-                    app:strokeWidth="1dp">
+                    app:cardElevation="8dp"
+                    app:cardPreventCornerOverlap="false"
+                    app:cardUseCompatPadding="false"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.Demo.Card"
+                    app:strokeWidth="0dp">
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:clipChildren="true"
+                        android:clipToPadding="true"
                         android:orientation="vertical"
                         android:padding="20dp">
 
@@ -123,6 +116,22 @@
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
+
+        <ImageButton
+            android:id="@+id/walkthrough_help_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bg_help_button"
+            android:clickable="true"
+            android:contentDescription="@string/walkthrough_help"
+            android:elevation="16dp"
+            android:focusable="true"
+            android:padding="12dp"
+            android:src="@drawable/ic_help_outline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

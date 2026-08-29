@@ -23,10 +23,19 @@ class MainActivity : AppCompatActivity() {
 
     private fun initialise() {
         binding.fileSelectionComponent.initialise(null, this, ::fileSelectionCallback)
+        setupDemoCard()
         binding.walkthroughHelpButton.setOnClickListener { showWalkthrough() }
+        binding.walkthroughHelpButton.bringToFront()
 
         if (shouldShowWalkthroughOnLaunch()) {
             binding.root.post { showWalkthrough() }
+        }
+    }
+
+    private fun setupDemoCard() {
+        binding.demoCard.apply {
+            clipToOutline = true
+            radius = 24f * resources.displayMetrics.density
         }
     }
 
@@ -57,7 +66,7 @@ class MainActivity : AppCompatActivity() {
                 description = getString(R.string.walkthrough_demo_description)
                 backText = getString(android.R.string.cancel)
                 nextText = getString(R.string.walkthrough_file_next)
-                placement = Placement.CENTER
+                placement = Placement.BOTTOM
             }
             .card(selectionBox) {
                 title = getString(R.string.walkthrough_file_title)
@@ -66,11 +75,12 @@ class MainActivity : AppCompatActivity() {
                 nextText = getString(R.string.walkthrough_file_next)
                 placement = Placement.BOTTOM
             }
-            .tooltip(binding.fileSelectionComponent) {
+            .card(binding.fileSelectionComponent) {
                 title = getString(R.string.walkthrough_selection_title)
                 description = getString(R.string.walkthrough_selection_description)
+                backText = getString(android.R.string.cancel)
                 nextText = getString(R.string.walkthrough_done)
-                placement = Placement.BOTTOM
+                placement = Placement.TOP
             }
             .doOnComplete { markWalkthroughShown() }
             .show()
