@@ -67,7 +67,7 @@ class FileSelectionComponent : ConstraintLayout {
         this.setTitleTextColor(
             attributes.getColor(
                 R.styleable.FileSelectionComponent_title_text_color,
-                Color.parseColor("#d3d3d3")
+                ContextCompat.getColor(context, R.color.text_primary)
             )
         )
         this.setTitleTextFontSize(
@@ -83,7 +83,7 @@ class FileSelectionComponent : ConstraintLayout {
         this.setDescriptionTextColor(
             attributes.getColor(
                 R.styleable.FileSelectionComponent_description_text_color,
-                Color.parseColor("#d3d3d3")
+                ContextCompat.getColor(context, R.color.primary)
             )
         )
         this.setDescriptionTextFontSize(

@@ -6,43 +6,123 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/bg_demo_gradient"
         tools:context=".MainActivity">
 
         <ImageButton
             android:id="@+id/walkthrough_help_button"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="20dp"
+            android:background="@drawable/bg_help_button"
             android:contentDescription="@string/walkthrough_help"
+            android:padding="10dp"
             android:src="@android:drawable/ic_menu_help"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:tint="#3F51B5" />
+            app:tint="@color/primary" />
 
-        <TextView
-            android:id="@+id/demo_text_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/custom_components_demo"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            android:textColor="#3F51B5"
-            android:layout_marginTop="48dp"
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:clipToPadding="false"
+            android:fillViewport="true"
+            android:overScrollMode="never"
+            android:paddingHorizontal="24dp"
+            android:paddingTop="24dp"
+            android:paddingBottom="32dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
 
-        <com.example.democustomcomponents.custom_components.FileSelectionComponent
-            android:id="@+id/file_selection_component"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/demo_text_view"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_section_badge"
+                    android:paddingHorizontal="12dp"
+                    android:paddingVertical="6dp"
+                    android:text="@string/demo_badge"
+                    android:textAppearance="@style/TextAppearance.Demo.Badge" />
+
+                <TextView
+                    android:id="@+id/demo_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:text="@string/demo_title"
+                    android:textAppearance="@style/TextAppearance.Demo.Title" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/demo_subtitle"
+                    android:textAppearance="@style/TextAppearance.Demo.Subtitle" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/demo_card"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="28dp"
+                    app:cardBackgroundColor="@color/surface"
+                    app:cardCornerRadius="24dp"
+                    app:cardElevation="6dp"
+                    app:strokeColor="@color/surface_stroke"
+                    app:strokeWidth="1dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="@string/file_selection_section_title"
+                            android:textAppearance="@style/TextAppearance.Demo.SectionTitle" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:text="@string/file_selection_section_body"
+                            android:textAppearance="@style/TextAppearance.Demo.SectionBody" />
+
+                        <com.example.democustomcomponents.custom_components.FileSelectionComponent
+                            android:id="@+id/file_selection_component"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            app:description_text="@string/file_selection_cta"
+                            app:description_text_color="@color/primary"
+                            app:selection_box_background="@drawable/bg_selection_zone"
+                            app:supported_types_text="@string/supported_file_types"
+                            app:title_text="@string/file_selection_title"
+                            app:title_text_color="@color/text_primary" />
+
+                    </LinearLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:text="@string/demo_footer_hint"
+                    android:textAppearance="@style/TextAppearance.Demo.Footer" />
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
                 description = getString(R.string.walkthrough_welcome_description)
                 nextText = getString(R.string.walkthrough_welcome_next)
             }
-            .card(binding.demoTextView) {
+            .card(binding.demoCard) {
                 title = getString(R.string.walkthrough_demo_title)
                 description = getString(R.string.walkthrough_demo_description)
                 backText = getString(android.R.string.cancel)

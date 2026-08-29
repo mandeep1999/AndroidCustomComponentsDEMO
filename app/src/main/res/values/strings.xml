@@ -1,7 +1,16 @@
 <resources>
     <string name="app_name">DemoCustomComponents</string>
     <string name="custom_components_demo">Custom Components DEMO</string>
-    <string name="click_to_select_a_file">Click to select a file</string>
+    <string name="demo_badge">ANDROID COMPONENTS</string>
+    <string name="demo_title">Custom Components</string>
+    <string name="demo_subtitle">Beautiful, reusable UI building blocks for your Android apps.</string>
+    <string name="file_selection_section_title">File Selection</string>
+    <string name="file_selection_section_body">A drop-in component for document uploads with picker integration and clear visual feedback.</string>
+    <string name="file_selection_title">Tap to choose a document</string>
+    <string name="file_selection_cta">Browse files</string>
+    <string name="supported_file_types">Supported formats: PDF, DOC, DOCX</string>
+    <string name="demo_footer_hint">Tap the help icon to replay the guided tour</string>
+    <string name="click_to_select_a_file">Tap to choose a document</string>
     <string name="walkthrough_help">Show walkthrough</string>
     <string name="walkthrough_welcome_title">Welcome</string>
     <string name="walkthrough_welcome_description">This demo showcases reusable custom Android components. Let\'s take a quick tour.</string>
