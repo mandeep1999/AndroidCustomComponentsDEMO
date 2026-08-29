@@ -67,7 +67,7 @@ class FileSelectionComponent : ConstraintLayout {
         this.setTitleTextColor(
             attributes.getColor(
                 R.styleable.FileSelectionComponent_title_text_color,
-                Color.parseColor("#d3d3d3")
+                ContextCompat.getColor(context, R.color.text_primary)
             )
         )
         this.setTitleTextFontSize(
@@ -83,7 +83,7 @@ class FileSelectionComponent : ConstraintLayout {
         this.setDescriptionTextColor(
             attributes.getColor(
                 R.styleable.FileSelectionComponent_description_text_color,
-                Color.parseColor("#d3d3d3")
+                ContextCompat.getColor(context, R.color.primary)
             )
         )
         this.setDescriptionTextFontSize(
@@ -133,7 +133,7 @@ class FileSelectionComponent : ConstraintLayout {
 
     private fun initialiseViews(supportedFileTypes: Array<String>?) {
         binding.selectionBox.setOnClickListener {
-            if ((supportedFileTypes?.size ?: 0) > 0) {
+            if (!supportedFileTypes.isNullOrEmpty()) {
                 getContent?.launch(supportedFileTypes)
             } else {
                 getContent?.launch(mimeTypes)
