@@ -32,15 +32,4 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">24dp</item>
     </style>
-
-    <style name="Widget.Demo.PresentationChip" parent="Widget.MaterialComponents.Chip.Action">
-        <item name="android:textAppearance">@style/TextAppearance.Demo.Badge</item>
-        <item name="chipBackgroundColor">@color/chip_background</item>
-        <item name="chipCornerRadius">999dp</item>
-        <item name="chipMinHeight">32dp</item>
-        <item name="chipStrokeWidth">0dp</item>
-        <item name="android:textColor">@color/chip_text</item>
-        <item name="android:clickable">false</item>
-        <item name="android:focusable">false</item>
-    </style>
 </resources>

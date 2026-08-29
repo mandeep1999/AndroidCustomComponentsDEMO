@@ -53,50 +53,11 @@
                     android:text="@string/demo_subtitle"
                     android:textAppearance="@style/TextAppearance.Demo.Subtitle" />
 
-                <com.google.android.material.chip.ChipGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    app:chipSpacingHorizontal="8dp"
-                    app:chipSpacingVertical="4dp">
-
-                    <com.google.android.material.chip.Chip
-                        style="@style/Widget.Demo.PresentationChip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/presentation_full_screen" />
-
-                    <com.google.android.material.chip.Chip
-                        style="@style/Widget.Demo.PresentationChip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/presentation_card" />
-
-                    <com.google.android.material.chip.Chip
-                        style="@style/Widget.Demo.PresentationChip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/presentation_spotlight" />
-
-                    <com.google.android.material.chip.Chip
-                        style="@style/Widget.Demo.PresentationChip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/presentation_tooltip" />
-
-                    <com.google.android.material.chip.Chip
-                        style="@style/Widget.Demo.PresentationChip"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/presentation_banner" />
-
-                </com.google.android.material.chip.ChipGroup>
-
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/demo_card"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="28dp"
+                    android:layout_marginTop="24dp"
                     android:clipChildren="true"
                     android:clipToOutline="true"
                     app:cardBackgroundColor="@color/surface"
@@ -115,24 +76,10 @@
                         android:orientation="vertical"
                         android:padding="20dp">
 
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:text="@string/file_selection_section_title"
-                            android:textAppearance="@style/TextAppearance.Demo.SectionTitle" />
-
-                        <TextView
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:text="@string/file_selection_section_body"
-                            android:textAppearance="@style/TextAppearance.Demo.SectionBody" />
-
                         <com.example.democustomcomponents.custom_components.FileSelectionComponent
                             android:id="@+id/file_selection_component"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="16dp"
                             app:description_text="@string/file_selection_cta"
                             app:description_text_color="@color/primary"
                             app:selection_box_background="@drawable/bg_selection_zone"
